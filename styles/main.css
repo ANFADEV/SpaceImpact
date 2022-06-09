@@ -17,6 +17,7 @@ body {
 
 .level {
     height: 100%;
+    position: relative;
 }
 
 
@@ -26,4 +27,18 @@ body {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     height: 16.66%;
+    position: absolute;
+
+    margin-left: 1em;
+}
+
+.projectile {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    /*height: 16.66%;*/
+
+    height: 2.66%;
+    position: absolute;
 }
