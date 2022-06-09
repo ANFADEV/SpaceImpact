@@ -1,0 +1,29 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.game-container {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 100%;
+
+    background-color: blue;
+}
+
+.level {
+    height: 100%;
+}
+
+
+.player {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    height: 16.66%;
+}
