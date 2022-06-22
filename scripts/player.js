@@ -8,7 +8,7 @@ function player(LevelContainer) {
     // ----------------- declarations variables -----------------
     let health = 3;
     let PlayerCurrentPosition = 50;
-    let projectiles = [];
+    //let projectiles = [];
 
     // ----------------- declarations fonctions -----------------
     this.die = () => {
@@ -24,7 +24,9 @@ function player(LevelContainer) {
             this
         );
         // l'ajouter au tableau projectiles
-        projectiles.push(nouveauP);
+        //projectiles.push(nouveauP);
+        //console.log(window.Projectiles);
+        Projectiles.push(nouveauP);
         // son
         // ... TODO
     }

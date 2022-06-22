@@ -38,7 +38,7 @@ body {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     /*height: 16.66%;*/
-
-    height: 2.66%;
+    height: calc(16.66% / 8);
+    
     position: absolute;
 }

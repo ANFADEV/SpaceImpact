@@ -11,10 +11,15 @@ let level = document.querySelector('.level');
 let monPlayer = new player(level);
 
 
+let Entities = [];
+let Projectiles = [];
 
-
-
-
+let gameLoop = setInterval(() => {
+    // Projectiles
+    for (let i = 0; i < Projectiles.length; i++) {
+        Projectiles[i].update();        
+    }
+}, 16.66);
 
 
 
