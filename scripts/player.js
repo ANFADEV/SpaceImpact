@@ -69,27 +69,99 @@ function player(LevelContainer) {
     this.move(PlayerCurrentPosition);
 
     // ajout event commandes
+
+    // window.addEventListener('keydown', (e) => {
+
+    //     // a chaque pression de touche
+    //     switch (e.code) {
+    //         case 'ArrowDown':{
+    //             // vers le bas
+    //             this.move(PlayerCurrentPosition + 1);
+    //             break;
+    //         }
+    //         case 'ArrowUp':{
+    //             // vers le haut
+    //             this.move(PlayerCurrentPosition - 1);
+    //             break;
+    //         }
+    //         case 'Space':{
+    //             this.shoot();
+    //             break;
+    //         }
+    //         default:
+    //             break;
+    //     }
+    // });
+let input={
+    up:false,
+    down:false,
+    space:false
+}
+
     window.addEventListener('keydown', (e) => {
 
         // a chaque pression de touche
         switch (e.code) {
             case 'ArrowDown':{
-                // vers le bas
-                this.move(PlayerCurrentPosition + 1);
+                input.down=true;
                 break;
             }
             case 'ArrowUp':{
-                // vers le haut
-                this.move(PlayerCurrentPosition - 1);
+                input.up=true;
                 break;
             }
             case 'Space':{
-                this.shoot();
+                input.space=true;
                 break;
             }
             default:
                 break;
         }
     });
+    window.addEventListener('keyup', (e) => {
+
+        // a chaque pression de touche
+        switch (e.code) {
+            case 'ArrowDown':{
+                input.down=false;
+                break;
+            }
+            case 'ArrowUp':{
+                input.up=false;
+                break;
+            }
+            case 'Space':{
+                input.space=false;
+                break;
+            }
+            default:
+                break;
+        }
+    });
+
+// Intervalle check des valeurs d'input
+
+    setInterval(() => {
+        if (input.down==true) {
+            // vers le bas
+            this.move(PlayerCurrentPosition + 1);
+        }
+
+        if (input.up==true) {
+            // vers le haut
+            this.move(PlayerCurrentPosition - 1);
+        }
+       
+    }, 16.66);
+    
+// Intervalle check valeur input SHOOT
+
+    setInterval(() => {
+        
+        if (input.space==true) {
+            this.shoot();
+        }
+        
+    }, 200);
 
 }

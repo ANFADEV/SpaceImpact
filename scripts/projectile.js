@@ -13,6 +13,7 @@ function projectile(LevelContainer, ShootingEntity) {
     // ----------------- declarations fonctions -----------------
 
     this.update = () => {
+        moveX(PlayerCurrentPosition.xPerc + 3/10);
         console.log('va en avant');
     }
     
