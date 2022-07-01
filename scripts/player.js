@@ -6,26 +6,24 @@
 function player(LevelContainer) {
 
     // ----------------- declarations variables -----------------
+
     let health = 3;
     let PlayerCurrentPosition = 50;
-    //let projectiles = [];
 
     // ----------------- declarations fonctions -----------------
+    
     this.die = () => {
         health = 0;
         console.log('le player est mort');
     }
 
     this.shoot = () => {
-        console.log('le player a shoot');
         // créer nouvelle instance de projectile
-        let nouveauP = new projectile(
+        let nouveauP = new Projectile(
             LevelContainer,
             this
         );
         // l'ajouter au tableau projectiles
-        //projectiles.push(nouveauP);
-        //console.log(window.Projectiles);
         Projectiles.push(nouveauP);
         // son
         // ... TODO
@@ -56,19 +54,19 @@ function player(LevelContainer) {
 
     // -------------------- initialisation --------------------
 
-    // creation du player
-    // ---- créer l'element player
+    // ---- creation du player
+    // créer l'element player
     this.htmlEl = document.createElement('img');
-    // ---- lui donner un parent
+    // lui donner un parent
     LevelContainer.appendChild(this.htmlEl);
-    // ---- lui donner l'image
+    // lui donner l'image
     this.htmlEl.src = 'images/player.png';
-    // ---- lui donner sa class
+    // lui donner sa class
     this.htmlEl.classList.add('player');
-    // ---- le positionner au mileu
+    // le positionner au mileu
     this.move(PlayerCurrentPosition);
 
-    // ajout event commandes
+    // ---- ajout event commandes
 
     // window.addEventListener('keydown', (e) => {
 
@@ -92,11 +90,12 @@ function player(LevelContainer) {
     //             break;
     //     }
     // });
-let input={
-    up:false,
-    down:false,
-    space:false
-}
+
+    let input={
+        up:false,
+        down:false,
+        space:false
+    }
 
     window.addEventListener('keydown', (e) => {
 
