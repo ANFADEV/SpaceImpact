@@ -146,7 +146,7 @@ let input={
             // vers le bas
             this.move(PlayerCurrentPosition + 1);
         }
-
+        
         if (input.up==true) {
             // vers le haut
             this.move(PlayerCurrentPosition - 1);

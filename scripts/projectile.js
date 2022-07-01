@@ -13,8 +13,19 @@ function projectile(LevelContainer, ShootingEntity) {
     // ----------------- declarations fonctions -----------------
 
     this.update = () => {
+        // deplacement projectile apres shoot
         moveX(PlayerCurrentPosition.xPerc + 3/10);
-        console.log('va en avant');
+        // disparition apres arrivée au bord de l'ecran
+        if (PlayerCurrentPosition.xPerc >= 100) {
+            // destruction element html
+            htmlEl.remove();
+            // destruction instance objet
+            for (let i = 0; i < Projectiles.length; i++) {
+                if (Projectiles[i] === this) {
+                    Projectiles.splice(i, 1);
+                }                
+            }
+        }
     }
     
     this.move = (percentageX, percentageY) => {
