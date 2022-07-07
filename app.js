@@ -7,13 +7,13 @@
 let conteneur = document.querySelector('.game-container');
 let level = document.querySelector('.level');
 
-// 
+// references entités
 let monPlayer = new Player(level);
-
-
 let Entities = [];
 let Projectiles = [];
 
+
+// loop
 let gameLoop = setInterval(() => {
     // Projectiles
     for (let i = 0; i < Projectiles.length; i++) {
@@ -22,5 +22,15 @@ let gameLoop = setInterval(() => {
 }, 16.66);
 
 
+// adaptabilité des entités au changements de taille du niveau
+window.addEventListener('resize', () => {
 
+    // actualisation player
+    monPlayer.refresh();
+
+    // actualisation projectiles
+    for (let i = 0; i < Projectiles.length; i++) {
+        Projectiles[i].refresh();
+    }
+});
 
