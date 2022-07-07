@@ -103,4 +103,13 @@ class Entity {
 
         return percentage;
     }
+
+    refresh() {
+
+        // refresh position
+        this.move(
+            this.EntityCurrentPosition.xPerc,
+            this.EntityCurrentPosition.yPerc
+        );
+    }
 }

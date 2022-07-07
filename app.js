@@ -8,7 +8,7 @@ let conteneur = document.querySelector('.game-container');
 let level = document.querySelector('.level');
 
 // 
-let monPlayer = new player(level);
+let monPlayer = new Player(level);
 
 
 let Entities = [];
@@ -20,10 +20,6 @@ let gameLoop = setInterval(() => {
         Projectiles[i].update();        
     }
 }, 16.66);
-
-
-
-
 
 
 
