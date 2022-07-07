@@ -9,6 +9,7 @@ let level = document.querySelector('.level');
 
 // references entités
 let monPlayer = new Player(level);
+monPlayer.refresh();// refresh position temporary fix to constructor TODO
 let Entities = [];
 let Projectiles = [];
 
