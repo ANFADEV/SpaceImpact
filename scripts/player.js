@@ -95,6 +95,7 @@ class Player extends Entity {
         setInterval(() => {
 
             if (this.input.space == true) {
+                // TODO this is called irregularly
                 this.shoot();
             }
 
@@ -116,7 +117,7 @@ class Player extends Entity {
     shoot = () => {
         // créer nouvelle instance de projectile
         let nouveauP = new Projectile(
-            LevelContainer,
+            this.LevelContainer,
             this
         );
         // l'ajouter au tableau projectiles

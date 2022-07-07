@@ -22,13 +22,13 @@ class Entity {
             console.error("Entity error: invalid imageUrl");
         }
         
-        this.#LevelContainer = levelContainer;
+        this.LevelContainer = levelContainer;
 
         // ---- creation du projectile
         // créer l'element projectile
         this.htmlEl = document.createElement('img');
         // lui donner un parent
-        this.#LevelContainer.appendChild(this.htmlEl);
+        this.LevelContainer.appendChild(this.htmlEl);
         // lui donner l'image
         this.htmlEl.src = imageUrl;
         // le positionner
@@ -39,7 +39,7 @@ class Entity {
 
     EntityCurrentPosition = { x:0, y:0, xPerc: 0, yPerc: 0 };
     htmlEl;
-    #LevelContainer;
+    LevelContainer;
 
     // ----------------- declarations fonctions -----------------
 
@@ -53,7 +53,7 @@ class Entity {
         percentage = this.#clampPercentage(percentage);
 
         // recuperer les mesures actuelles des elements
-        let hauteurParent = this.#LevelContainer.getBoundingClientRect().height;
+        let hauteurParent = this.LevelContainer.getBoundingClientRect().height;
         let hauteurPlayer = this.htmlEl.getBoundingClientRect().height;
 
         // calculer position en pixel du player par rapport au div level
@@ -75,7 +75,7 @@ class Entity {
         percentage = this.#clampPercentage(percentage);
 
         // recuperer les mesures actuelles des elements
-        let largeurParent = this.#LevelContainer.getBoundingClientRect().width;
+        let largeurParent = this.LevelContainer.getBoundingClientRect().width;
         let largeurPlayer = this.htmlEl.getBoundingClientRect().width;
 
         // calculer position en pixel du player par rapport au div level
