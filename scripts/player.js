@@ -3,24 +3,121 @@
  * Player container
  * @param {*} LevelContainer Level dans le quel player va etre instancié
  */
-function player(LevelContainer) {
+class Player extends Entity {
+
+    // -------------------- initialisation --------------------
+
+    constructor(levelContainer, initialPosition = {x: 0, y: 50}, speed = 60) {
+
+        // ---- calculer la position
+        // TODO prendre en consideration hauteur player
+    
+        // ---- créer la base de cette entitée
+        super(levelContainer, initialPosition , 'images/player.png');
+
+        // ---- lui donner sa class
+        this.htmlEl.classList.add('player');  
+
+        this.initialPosition = initialPosition;
+        this.#Speed = speed;
+
+        // ---- création du gestionnaire de commande 
+        this.input = {
+            up: false,
+            down: false,
+            space: false
+        }
+
+        window.addEventListener('keydown', (e) => {
+
+            // a chaque pression de touche
+            switch (e.code) {
+                case 'ArrowDown': {
+                    this.input.down = true;
+                    break;
+                }
+                case 'ArrowUp': {
+                    this.input.up = true;
+                    break;
+                }
+                case 'Space': {
+                    this.input.space = true;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+        window.addEventListener('keyup', (e) => {
+
+            // a chaque pression de touche
+            switch (e.code) {
+                case 'ArrowDown': {
+                    this.input.down = false;
+                    break;
+                }
+                case 'ArrowUp': {
+                    this.input.up = false;
+                    break;
+                }
+                case 'Space': {
+                    this.input.space = false;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+
+        // Intervalle check des valeurs d'input
+
+        setInterval(() => {
+            if (this.input.down == true) {
+                // vers le bas
+                this.move(
+                    this.EntityCurrentPosition.xPerc,
+                    this.EntityCurrentPosition.yPerc + (this.#Speed * 1/60)
+                );
+            }
+
+            if (this.input.up == true) {
+                // vers le haut
+                this.move(
+                    this.EntityCurrentPosition.xPerc,
+                    this.EntityCurrentPosition.yPerc - (this.#Speed * 1/60)
+                );
+            }
+
+        }, 16.66);
+
+        // Intervalle check valeur input SHOOT
+
+        setInterval(() => {
+
+            if (this.input.space == true) {
+                // TODO this is called irregularly
+                this.shoot();
+            }
+
+        }, 200);
+    }
 
     // ----------------- declarations variables -----------------
 
-    let health = 3;
-    let PlayerCurrentPosition = 50;
-
-    // ----------------- declarations fonctions -----------------
+    health = 3;
+    #Speed = 0;
     
-    this.die = () => {
+    // ----------------- declarations fonctions -----------------
+
+    die = () => {
         health = 0;
         console.log('le player est mort');
     }
 
-    this.shoot = () => {
+    shoot = () => {
         // créer nouvelle instance de projectile
         let nouveauP = new Projectile(
-            LevelContainer,
+            this.LevelContainer,
             this
         );
         // l'ajouter au tableau projectiles
@@ -28,139 +125,6 @@ function player(LevelContainer) {
         // son
         // ... TODO
     }
-
-    this.move = (percentage) => {
-
-        // limiter pourcentage
-        // ---- prend 100 si percentage > 100
-        percentage = Math.min(percentage, 100);
-        // ---- prend 0 si percentage < 0
-        percentage = Math.max(percentage, 0);
-
-        // recuperer les mesures actuelles des elements
-        let hauteurParent = LevelContainer.getBoundingClientRect().height;
-        let hauteurPlayer = this.htmlEl.getBoundingClientRect().height;
-
-        // calculer position en pixel du player par rapport au div level
-        hauteurParent -= hauteurPlayer;
-        let positionInPixel = hauteurParent/(100/percentage) - hauteurPlayer;
-        positionInPixel += hauteurPlayer;
-
-        // appliquer le positionnement avec style css
-        this.htmlEl.style.transform = 'translateY(' + positionInPixel + 'px)';
-
-        PlayerCurrentPosition = percentage;
-    }
-
-    // -------------------- initialisation --------------------
-
-    // ---- creation du player
-    // créer l'element player
-    this.htmlEl = document.createElement('img');
-    // lui donner un parent
-    LevelContainer.appendChild(this.htmlEl);
-    // lui donner l'image
-    this.htmlEl.src = 'images/player.png';
-    // lui donner sa class
-    this.htmlEl.classList.add('player');
-    // le positionner au mileu
-    this.move(PlayerCurrentPosition);
-
-    // ---- ajout event commandes
-
-    // window.addEventListener('keydown', (e) => {
-
-    //     // a chaque pression de touche
-    //     switch (e.code) {
-    //         case 'ArrowDown':{
-    //             // vers le bas
-    //             this.move(PlayerCurrentPosition + 1);
-    //             break;
-    //         }
-    //         case 'ArrowUp':{
-    //             // vers le haut
-    //             this.move(PlayerCurrentPosition - 1);
-    //             break;
-    //         }
-    //         case 'Space':{
-    //             this.shoot();
-    //             break;
-    //         }
-    //         default:
-    //             break;
-    //     }
-    // });
-
-    let input={
-        up:false,
-        down:false,
-        space:false
-    }
-
-    window.addEventListener('keydown', (e) => {
-
-        // a chaque pression de touche
-        switch (e.code) {
-            case 'ArrowDown':{
-                input.down=true;
-                break;
-            }
-            case 'ArrowUp':{
-                input.up=true;
-                break;
-            }
-            case 'Space':{
-                input.space=true;
-                break;
-            }
-            default:
-                break;
-        }
-    });
-    window.addEventListener('keyup', (e) => {
-
-        // a chaque pression de touche
-        switch (e.code) {
-            case 'ArrowDown':{
-                input.down=false;
-                break;
-            }
-            case 'ArrowUp':{
-                input.up=false;
-                break;
-            }
-            case 'Space':{
-                input.space=false;
-                break;
-            }
-            default:
-                break;
-        }
-    });
-
-// Intervalle check des valeurs d'input
-
-    setInterval(() => {
-        if (input.down==true) {
-            // vers le bas
-            this.move(PlayerCurrentPosition + 1);
-        }
-        
-        if (input.up==true) {
-            // vers le haut
-            this.move(PlayerCurrentPosition - 1);
-        }
-       
-    }, 16.66);
-    
-// Intervalle check valeur input SHOOT
-
-    setInterval(() => {
-        
-        if (input.space==true) {
-            this.shoot();
-        }
-        
-    }, 200);
+   
 
 }
